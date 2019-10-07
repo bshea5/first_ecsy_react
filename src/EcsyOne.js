@@ -7,6 +7,7 @@ import { Position } from "./ecs/components/Position";
 import { Shape } from "./ecs/components/Shape";
 import { MovableSystem } from "./ecs/systems/MovableSystem.js";
 import { RendererSystem } from "./ecs/systems/RendererSystem.js";
+import { Selectable } from "./ecs/components/Selectable";
 
 const NUM_ELEMENTS = 50;
 const SPEED_MULTIPLIER = 0.3;
@@ -45,6 +46,7 @@ for (let i = 0; i < NUM_ELEMENTS; i++) {
         .addComponent(Shape, getRandomShape())
         .addComponent(Position, getRandomPosition())
         .addComponent(Renderable)
+        .addComponent(Selectable, { selected: i > 40 })
 }
 
 // Run!

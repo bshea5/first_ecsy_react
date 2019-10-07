@@ -5,6 +5,7 @@ import {
 import { canvasWidth, canvasHeight, ctx } from "../../CanvasOne";
 import { Position } from "../components/Position";
 import { Shape } from "../components/Shape";
+import { Selectable } from "../components/Selectable";
 import { Renderable } from "../components/Renderable";
 
 // RendererSystem
@@ -20,29 +21,33 @@ class RendererSystem extends System {
             var shape = entity.getComponent(Shape);
             var position = entity.getComponent(Position);
 
-            this.drawShape(position, shape);
+            // get if has component selectable and if selected
+            var select = entity.getComponent(Selectable) || false;
+                select = select.selected || false;
+
+            this.drawShape(position, shape, select);
         });
     }
 
-    drawShape(position, shape) {
+    drawShape(position, shape, selected=false) {
         if (shape.primitive === 'box') {
-            this.drawBox(position, shape.size, shape.halfSize());
+            this.drawBox(position, shape.size, shape.halfSize(), selected);
         } else {
-            this.drawCircle(position, shape.halfSize());
+            this.drawCircle(position, shape.halfSize(), selected);
         }
     }
 
-    drawCircle(position, halfSize) {
+    drawCircle(position, halfSize, selected=false) {
         ctx.beginPath();
         ctx.arc(position.x, position.y, halfSize, 0, 2 * Math.PI, false);
-        ctx.fillStyle = "#39c495";
+        ctx.fillStyle = selected ? "#0000FF" : "#39c495";
         ctx.fill();
         ctx.lineWidth = 2;
         ctx.strokeStyle = "#0b845b";
         ctx.stroke();
     }
 
-    drawBox(position, size, halfSize) {
+    drawBox(position, size, halfSize, selected=false) {
         ctx.beginPath();
         ctx.rect(position.x - halfSize, position.y - halfSize, size, size);
         ctx.fillStyle = "#e2736e";
