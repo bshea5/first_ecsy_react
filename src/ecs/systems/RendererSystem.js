@@ -32,6 +32,8 @@ class RendererSystem extends System {
     drawShape(position, shape, selected=false) {
         if (shape.primitive === 'box') {
             this.drawBox(position, shape.size, shape.halfSize(), selected);
+        } else if (shape.primitive === 'triangle') {
+            this.drawTriangle(position, shape.size, shape.halfSize(), selected);
         } else {
             this.drawCircle(position, shape.halfSize(), selected);
         }
@@ -51,6 +53,18 @@ class RendererSystem extends System {
         ctx.beginPath();
         ctx.rect(position.x - halfSize, position.y - halfSize, size, size);
         ctx.fillStyle = "#e2736e";
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "#b74843";
+        ctx.stroke();
+    }
+
+    drawTriangle(position, size, halfSize, selected=false) {
+        ctx.beginPath();
+        ctx.moveTo(position.x, position.y + halfSize);
+        ctx.lineTo(position.x - halfSize, position.y - halfSize);
+        ctx.lineTo(position.x + halfSize, position.y - halfSize);
+        ctx.fillStyle = "#ffff00";
         ctx.fill();
         ctx.lineWidth = 2;
         ctx.strokeStyle = "#b74843";

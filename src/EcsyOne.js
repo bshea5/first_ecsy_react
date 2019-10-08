@@ -49,6 +49,15 @@ for (let i = 0; i < NUM_ELEMENTS; i++) {
         .addComponent(Selectable, { selected: i > 40 })
 }
 
+// create one triangle
+world
+    .createEntity()
+    .addComponent(Velocity, getRandomVelocity())
+    .addComponent(Shape, {primitive: "triangle"})
+    .addComponent(Position, getRandomPosition())
+    .addComponent(Renderable)
+    .addComponent(Selectable, { selected: false })
+
 // Run!
 function run() {
     // Compute delta and elapsed time
