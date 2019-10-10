@@ -2,10 +2,12 @@ import {
   System
 } from "ecsy";
 
-import { canvasWidth, canvasHeight } from "../../CanvasOne";
 import { Velocity } from "../components/Velocity";
 import { Position } from "../components/Position";
 import { Shape } from "../components/Shape";
+
+const BOUNDS_WIDTH = window.innerWidth;
+const BOUNDS_HEIGHT = window.innerHeight;
 
 // MovableSystem
 class MovableSystem extends System {
@@ -22,10 +24,10 @@ class MovableSystem extends System {
       position.x += velocity.x * delta;
       position.y += velocity.y * delta;
 
-      if (position.x > canvasWidth + SHAPE_HALF_SIZE) position.x = -SHAPE_HALF_SIZE;
-      if (position.x < -SHAPE_HALF_SIZE) position.x = canvasWidth + SHAPE_HALF_SIZE;
-      if (position.y > canvasHeight + SHAPE_HALF_SIZE) position.y = -SHAPE_HALF_SIZE;
-      if (position.y < -SHAPE_HALF_SIZE) position.y = canvasHeight + SHAPE_HALF_SIZE;
+      if (position.x > BOUNDS_WIDTH + SHAPE_HALF_SIZE) position.x = -SHAPE_HALF_SIZE;
+      if (position.x < -SHAPE_HALF_SIZE) position.x = BOUNDS_WIDTH + SHAPE_HALF_SIZE;
+      if (position.y > BOUNDS_HEIGHT + SHAPE_HALF_SIZE) position.y = -SHAPE_HALF_SIZE;
+      if (position.y < -SHAPE_HALF_SIZE) position.y = BOUNDS_HEIGHT + SHAPE_HALF_SIZE;
     });
   }
 }

@@ -1,6 +1,5 @@
 import { World } from "ecsy";
 
-import { canvasWidth, canvasHeight } from "./CanvasOne";
 import { Renderable } from "./ecs/components/Renderable";
 import { Velocity } from "./ecs/components/Velocity";
 import { Position } from "./ecs/components/Position";
@@ -14,6 +13,7 @@ import { RendererSystem } from "./ecs/systems/RendererSystem.js";
 const NUM_ELEMENTS = 50;
 const SPEED_MULTIPLIER = 0.3;
 const SHAPE_SIZE = 50;
+const TEMP_SIZE = 500;
 
 // Create world and register the systems on it
 var world = new World();
@@ -32,8 +32,8 @@ function getRandomVelocity() {
 
 function getRandomPosition() {
     return {
-        x: Math.random() * canvasWidth,
-        y: Math.random() * canvasHeight
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight
     };
 }
 

@@ -2,7 +2,6 @@ import {
     System
 } from "ecsy";
 
-import { canvasWidth, canvasHeight } from "../../CanvasOne";
 import { Position } from "../components/Position";
 import { Shape } from "../components/Shape";
 import { Renderable } from "../components/Renderable";

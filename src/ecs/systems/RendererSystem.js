@@ -1,20 +1,25 @@
-import {
-    System
-  } from "ecsy";
-  
-import { canvasWidth, canvasHeight, ctx } from "../../CanvasOne";
+import { System } from "ecsy";
+import * as PIXI from 'pixi.js'
+// import { canvasWidth, canvasHeight, ctx } from "../../CanvasOne";
 import { Position } from "../components/Position";
 import { Shape } from "../components/Shape";
 import { Selectable } from "../components/Selectable";
 import { Renderable } from "../components/Renderable";
 
+const app = new PIXI.Application({ 
+    width: window.innerWidth,
+    height: window.innerHeight,
+    antialias: true 
+});
+document.body.appendChild(app.view);
+
+const graphics = new PIXI.Graphics();
+
 // RendererSystem
 class RendererSystem extends System {
     // This method will get called on every frame by default
     execute(delta, time) {
-
-        ctx.fillStyle = "#d4d4d4";
-        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        graphics.clear();
 
         // Iterate through all the entities on the query
         this.queries.renderables.results.forEach(entity => {
@@ -27,6 +32,8 @@ class RendererSystem extends System {
 
             this.drawShape(position, shape, select);
         });
+
+        app.stage.addChild(graphics);
     }
 
     drawShape(position, shape, selected=false) {
@@ -40,35 +47,31 @@ class RendererSystem extends System {
     }
 
     drawCircle(position, halfSize, selected=false) {
-        ctx.beginPath();
-        ctx.arc(position.x, position.y, halfSize, 0, 2 * Math.PI, false);
-        ctx.fillStyle = selected ? "#0000FF" : "#39c495";
-        ctx.fill();
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = "#0b845b";
-        ctx.stroke();
+        graphics.lineStyle(10, 0x0b845b, 1);
+        graphics.beginFill(0x39c495);
+        graphics.drawCircle(
+            position.x, position.y, halfSize
+        );
+        graphics.endFill();
     }
 
     drawBox(position, size, halfSize, selected=false) {
-        ctx.beginPath();
-        ctx.rect(position.x - halfSize, position.y - halfSize, size, size);
-        ctx.fillStyle = "#e2736e";
-        ctx.fill();
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = "#b74843";
-        ctx.stroke();
+        graphics.lineStyle(10, 0xb74843, 1);
+        graphics.beginFill(0xe2736e);
+        graphics.drawRect(
+            position.x - halfSize, position.y - halfSize,
+            size, size
+        );
+        graphics.endFill();
     }
 
     drawTriangle(position, size, halfSize, selected=false) {
-        ctx.beginPath();
-        ctx.moveTo(position.x, position.y + halfSize);
-        ctx.lineTo(position.x - halfSize, position.y - halfSize);
-        ctx.lineTo(position.x + halfSize, position.y - halfSize);
-        ctx.fillStyle = "#ffff00";
-        ctx.fill();
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = "#b74843";
-        ctx.stroke();
+        graphics.lineStyle(5, 0x5F9EA0, 1);
+        graphics.beginFill(0x00FFFF);
+        graphics.moveTo(position.x, position.y + halfSize);
+        graphics.lineTo(position.x - halfSize, position.y - halfSize);
+        graphics.lineTo(position.x + halfSize, position.y - halfSize);
+        graphics.endFill();
     }
 }
 
