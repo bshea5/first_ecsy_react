@@ -46,6 +46,8 @@ class RendererSystem extends System {
         }
     }
 
+    // NOTE: There seems to be a bug when drawing a large number of circles.
+    //       Drawing a large number of them will cause tearing in many of them.
     drawCircle(position, halfSize, selected=false) {
         graphics.lineStyle(10, 0x0b845b, 1);
         graphics.beginFill(0x39c495);
