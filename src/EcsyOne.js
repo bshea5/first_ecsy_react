@@ -5,16 +5,20 @@ import { Renderable } from "./ecs/components/Renderable";
 import { Velocity } from "./ecs/components/Velocity";
 import { Position } from "./ecs/components/Position";
 import { Shape } from "./ecs/components/Shape";
+import { BoundingCircle } from "./ecs/components/BoundingCircle";
+import { Selectable } from "./ecs/components/Selectable";
+import { SelectSystem } from "./ecs/systems/SelectSystem.js";
 import { MovableSystem } from "./ecs/systems/MovableSystem.js";
 import { RendererSystem } from "./ecs/systems/RendererSystem.js";
-import { Selectable } from "./ecs/components/Selectable";
 
 const NUM_ELEMENTS = 50;
 const SPEED_MULTIPLIER = 0.3;
+const SHAPE_SIZE = 50;
 
 // Create world and register the systems on it
 var world = new World();
 world
+    .registerSystem(SelectSystem)
     .registerSystem(MovableSystem)
     .registerSystem(RendererSystem);
 
@@ -46,6 +50,7 @@ for (let i = 0; i < NUM_ELEMENTS; i++) {
         .addComponent(Shape, getRandomShape())
         .addComponent(Position, getRandomPosition())
         .addComponent(Renderable)
+        .addComponent(BoundingCircle, { radius: SHAPE_SIZE / 2})
         .addComponent(Selectable, { selected: i > 40 })
 }
 
@@ -56,6 +61,7 @@ world
     .addComponent(Shape, {primitive: "triangle"})
     .addComponent(Position, getRandomPosition())
     .addComponent(Renderable)
+    .addComponent(BoundingCircle, { radius: SHAPE_SIZE / 2})
     .addComponent(Selectable, { selected: false })
 
 // Run!
