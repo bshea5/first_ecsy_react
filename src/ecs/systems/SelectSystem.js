@@ -21,9 +21,9 @@ class SelectSystem extends System {
         // TODO: check if clicked based on position and mouse down position(if any)
 
         // placeholder, randomize selections, to test toggling
-        selectable.selected = selectable.selected 
-            ? Math.random() >= 0.05
-            : Math.random() >= 0.90;
+        // selectable.selected = selectable.selected 
+        //     ? Math.random() >= 0.05
+        //     : Math.random() >= 0.90;
         });
     }
 
