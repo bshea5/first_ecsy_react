@@ -37,7 +37,7 @@ for (let i = 0; i < NUM_ELEMENTS; i++) {
         .addComponent(Position, getRandomPosition())
         .addComponent(Renderable)
         .addComponent(BoundingCircle, { radius: SHAPE_SIZE / 2})
-        .addComponent(Selectable, { selected: i > 95 })
+        .addComponent(Selectable)
 }
 
 // create one triangle

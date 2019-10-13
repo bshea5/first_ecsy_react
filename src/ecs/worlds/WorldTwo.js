@@ -8,8 +8,6 @@ import { Renderable } from "../components/Renderable";
 import { Velocity } from "../components/Velocity";
 import { Position } from "../components/Position";
 import { Shape } from "../components/Shape";
-import { BoundingCircle } from "../components/BoundingCircle";
-import { Selectable } from "../components/Selectable";
 import { SelectSystem } from "../systems/SelectSystem.js";
 import { MovableSystem } from "../systems/MovableSystem.js";
 import { RendererSystem } from "../systems/RendererSystem.js";
@@ -29,5 +27,3 @@ world
     .addComponent(Shape, {primitive: "triangle", size: 500})
     .addComponent(Position, {x: window.innerWidth / 2, y: 0})
     .addComponent(Renderable)
-    .addComponent(BoundingCircle)
-    .addComponent(Selectable, { selected: false })

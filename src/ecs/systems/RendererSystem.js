@@ -47,7 +47,7 @@ class RendererSystem extends System {
         if (shape.primitive === 'box') {
             this.drawBox(position, shape.size, shape.halfSize(), color, borderColor, selected);
         } else if (shape.primitive === 'triangle') {
-            this.drawTriangle(position, shape.size, shape.halfSize(), shape.color, shape.borderColor, selected);
+            this.drawTriangle(position, shape.size, shape.halfSize(), color, borderColor, selected);
         } else {
             this.drawCircle(position, shape.halfSize(), color, borderColor, selected);
         }
@@ -92,6 +92,16 @@ RendererSystem.queries = {
     sprites: {
         components: [Renderable, Sprite]
     }
+}
+
+// We're gonna assume circle for now.
+// This will cause some incorrect clicks for boxes and triangles,
+// but this is acceptable for testing purposes.
+// (xp−xc)2+(yp−yc)2 < r
+function inBoundingCircle(br, bx, by, x, y) {
+    return Math.sqrt(
+        Math.abs(bx - x)^2 + Math.abs(by - y)^2 
+    ) < br
 }
 
 export { RendererSystem }; 
