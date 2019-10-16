@@ -1,12 +1,13 @@
 import { System } from "ecsy";
 import * as THREE from "three";
 
-import { ThreeShape } from "../components/ThreeShape";
+import { Shape } from "../components/Shape";
 import { Renderable } from "../components/Renderable";
 import { Position } from "../components/Position";
+import { Rotation } from "../components/Rotation";
 
 let camera = new THREE.PerspectiveCamera( 
-    70, window.innerWidth / window.innerHeight, 0.01, 10 
+    100, window.innerWidth / window.innerHeight, 0.01, 10 
 );
 camera.position.z = 1;
 
@@ -28,27 +29,31 @@ class ThreeRendererSystem extends System {
 
         // Iterate through all the entities on the query
         this.queries.shapes.results.forEach(entity => {
-            var threeShape = entity.getComponent(ThreeShape);
+            var shape = entity.getComponent(Shape);
             var position = entity.getMutableComponent(Position);
+            var rotation = entity.getMutableComponent(Rotation);
 
-            if (threeShape.primitive === 'box') {
-                this.drawBox(position);
+            if (shape.primitive === 'box') {
+                this.drawBox(position, rotation);
             }
 
-            position.x += 0.01;
-            position.y += 0.01;
+            // rotation should be handled else where
+            rotation.x += 0.01;
+            rotation.y += 0.01;
         });
 
         renderer.render( scene, camera );
     }
 
-    drawBox(position) {
+    drawBox(position, rotation) {
         let geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
         let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
         let mesh = new THREE.Mesh( geometry, material );
 
-        mesh.rotation.x = position.x;
-        mesh.rotation.y = position.y;
+        mesh.rotation.x = rotation.x;
+        mesh.rotation.y = rotation.y;
+
+        // mesh.position.set(position.x, position.y, position.z);
 
         scene.add( mesh );
     }
@@ -57,7 +62,7 @@ class ThreeRendererSystem extends System {
 // Define a query of entities that have "Renderable" and "Shape" components
 ThreeRendererSystem.queries = {
     shapes: {
-        components: [Renderable, ThreeShape, Position]
+        components: [Renderable, Shape, Position, Rotation]
     }
 }
 
