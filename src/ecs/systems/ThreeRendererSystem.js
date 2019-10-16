@@ -7,9 +7,11 @@ import { Position } from "../components/Position";
 import { Rotation } from "../components/Rotation";
 
 let camera = new THREE.PerspectiveCamera( 
-    100, window.innerWidth / window.innerHeight, 0.01, 10 
+    100, window.innerWidth / window.innerHeight, 0.01, 2000
 );
-camera.position.z = 1;
+camera.position.x = window.innerWidth / 2;
+camera.position.y = window.innerHeight / 2;
+camera.position.z = window.innerHeight / 2;
 
 let scene = new THREE.Scene();
 
@@ -34,7 +36,7 @@ class ThreeRendererSystem extends System {
             var rotation = entity.getMutableComponent(Rotation);
 
             if (shape.primitive === 'box') {
-                this.drawBox(position, rotation);
+                this.drawBox(shape.size, position, rotation);
             }
 
             // rotation should be handled else where
@@ -42,21 +44,44 @@ class ThreeRendererSystem extends System {
             rotation.y += 0.01;
         });
 
+        this.drawHelper();
+
         renderer.render( scene, camera );
     }
 
-    drawBox(position, rotation) {
-        let geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
+    drawBox(size, position, rotation) {
+        //size = 0.2;
+        let geometry = new THREE.BoxGeometry( size, size, size );
         let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
         let mesh = new THREE.Mesh( geometry, material );
 
         mesh.rotation.x = rotation.x;
         mesh.rotation.y = rotation.y;
 
-        // mesh.position.set(position.x, position.y, position.z);
+        mesh.position.set(position.x, position.y, position.z);
 
         scene.add( mesh );
     }
+
+    drawHelper() {
+        var helper = new THREE.CameraHelper( camera );
+        scene.add( helper );
+
+        var material = new THREE.LineBasicMaterial({
+            color: 0xff0000
+        });
+        
+        var geometry = new THREE.Geometry();
+        geometry.vertices.push(
+            new THREE.Vector3( -1, 0, 0 ),
+            new THREE.Vector3( -1, 1, 0 ),
+            new THREE.Vector3( -1, -1, 0 )
+        );
+        
+        var line = new THREE.Line( geometry, material );
+        scene.add( line );
+    }
+
 }
 
 // Define a query of entities that have "Renderable" and "Shape" components

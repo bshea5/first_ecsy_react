@@ -23,7 +23,7 @@ world
 // create one 3d box via three js
 world
     .createEntity()
-    .addComponent(Shape, {primitive: "box", size: 500})
+    .addComponent(Shape, {primitive: "box", size: 50})
     .addComponent(Position)
     .addComponent(Rotation)
     .addComponent(Velocity, getRandomVelocity())
