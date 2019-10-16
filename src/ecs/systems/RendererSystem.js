@@ -87,10 +87,10 @@ class RendererSystem extends System {
 // Define a query of entities that have "Renderable" and "Shape" components
 RendererSystem.queries = {
     shapes: {
-        components: [Renderable, Shape]
+        components: [Renderable, Shape, Position]
     },
     sprites: {
-        components: [Renderable, Sprite]
+        components: [Renderable, Sprite, Position]
     }
 }
 
