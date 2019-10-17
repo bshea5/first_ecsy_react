@@ -7,7 +7,7 @@ import { Position } from "../components/Position";
 import { Rotation } from "../components/Rotation";
 
 let camera = new THREE.PerspectiveCamera( 
-    100, window.innerWidth / window.innerHeight, 0.01, 2000
+    90, window.innerWidth / window.innerHeight, 0.01, 2000
 );
 camera.position.x = window.innerWidth / 2;
 camera.position.y = window.innerHeight / 2;

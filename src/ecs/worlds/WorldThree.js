@@ -13,6 +13,8 @@ import { Velocity } from "../components/Velocity";
 
 import { getRandomVelocity } from "../../global/functions.js";
 
+const NUM_ELEMENTS = 5;
+
 // Create world and register the systems on it
 export var world = new World();
 
@@ -21,10 +23,20 @@ world
     .registerSystem(ThreeRendererSystem);
 
 // create one 3d box via three js
-world
-    .createEntity()
-    .addComponent(Shape, {primitive: "box", size: 50})
-    .addComponent(Position)
-    .addComponent(Rotation)
-    .addComponent(Velocity, getRandomVelocity())
-    .addComponent(Renderable)
+// world
+//     .createEntity()
+//     .addComponent(Shape, {primitive: "box", size: 50})
+//     .addComponent(Position)
+//     .addComponent(Rotation)
+//     .addComponent(Velocity, getRandomVelocity())
+//     .addComponent(Renderable)
+
+for (let i = 0; i < NUM_ELEMENTS; i++) {
+    world
+        .createEntity()
+        .addComponent(Shape, {primitive: "box", size: 50})
+        .addComponent(Position)
+        .addComponent(Rotation)
+        .addComponent(Velocity, getRandomVelocity())
+        .addComponent(Renderable)
+}
