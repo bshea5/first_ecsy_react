@@ -1,6 +1,7 @@
 import { world as world1 } from './ecs/worlds/WorldOne';
-import { world as world2 } from './ecs/worlds/WorldTwo';
+import { world as world2, world } from './ecs/worlds/WorldTwo';
 import { world as world3 } from './ecs/worlds/WorldThree';
+import { world as world4 } from './ecs/worlds/WorldFour';
 
 const worlds = [
     world1,
@@ -27,7 +28,7 @@ function toggleWorld(e) {
     console.log("change worlds!");
     worlds[worldIndex].stop();
     worldIndex++;
-    worldIndex = worldIndex < 3 ? worldIndex : 0;
+    worldIndex = worldIndex < worlds.length ? worldIndex : 0;
     worlds[worldIndex].play();
 }
 

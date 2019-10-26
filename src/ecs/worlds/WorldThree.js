@@ -11,7 +11,7 @@ import { MovableSystem } from "../systems/MovableSystem";
 import { Rotation } from "../components/Rotation";
 import { Velocity } from "../components/Velocity";
 
-import { getRandomVelocity } from "../../global/functions.js";
+import { getRandomVelocity } from "../../global/functions";
 
 const NUM_ELEMENTS = 5;
 

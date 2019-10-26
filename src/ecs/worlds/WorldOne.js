@@ -16,7 +16,7 @@ import { RendererSystem } from "../systems/RendererSystem.js";
 
 import { 
     getRandomPosition, getRandomShape, getRandomVelocity 
-} from "../../global/functions.js";
+} from "../../global/functions";
 
 const NUM_ELEMENTS = 100;
 const SHAPE_SIZE = 50;
