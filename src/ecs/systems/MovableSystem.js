@@ -1,10 +1,15 @@
 import {
   System
 } from "ecsy";
-
-import { Velocity } from "../components/Velocity";
-import { Position } from "../components/Position";
-import { Shape } from "../components/Shape";
+import {
+  Velocity
+} from "../components/Velocity";
+import {
+  Position
+} from "../components/Position";
+import {
+  Shape
+} from "../components/Shape";
 
 const BOUNDS_WIDTH = window.innerWidth;
 const BOUNDS_HEIGHT = window.innerHeight;
@@ -18,7 +23,7 @@ class MovableSystem extends System {
       var velocity = entity.getComponent(Velocity);
       var position = entity.getMutableComponent(Position);
       var shape = entity.getComponent(Shape);
-     
+
       const SHAPE_HALF_SIZE = shape.halfSize();
 
       position.x += velocity.x * delta;
@@ -39,4 +44,6 @@ MovableSystem.queries = {
   }
 }
 
-export { MovableSystem }
+export {
+  MovableSystem
+}
