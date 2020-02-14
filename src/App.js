@@ -10,7 +10,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
 
-        <p>Scroll down to see stuff.</p>
+        <p>Scroll down to see stuff. Press any key to toggle worlds.</p>
       </header>
     </div>
   );
