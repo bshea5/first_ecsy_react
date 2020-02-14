@@ -24,7 +24,7 @@ world
 world
     .createEntity()
     .addComponent(Shape, {primitive: "box", size: 500})
-    .addComponent(Position)
+    .addComponent(Position, {x: 50, y: 50})
     .addComponent(Rotation)
     .addComponent(Velocity, getRandomVelocity())
     .addComponent(Renderable)

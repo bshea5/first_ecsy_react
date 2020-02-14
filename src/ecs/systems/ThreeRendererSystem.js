@@ -40,6 +40,8 @@ class ThreeRendererSystem extends System {
             // rotation should be handled else where
             rotation.x += 0.01;
             rotation.y += 0.01;
+
+            position.x = 50;
         });
 
         renderer.render( scene, camera );
